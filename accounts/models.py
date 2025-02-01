@@ -3,14 +3,16 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, email, phone_number, password=None, **extra_fields):
+    def create(self, username, email, phone_number, password=None, **extra_fields):
+        print("11111111111111111111111111")
         if not username:
             raise ValueError("The Username field must be set")
         if not email:
             raise ValueError("The Email field must be set")
         if not phone_number:
-            raise ValueError("The Phone Number field must be set")
+            raise ValueError("The Phone Number field musیییییییt be set")
 
+        print('create_user')
         email = self.normalize_email(email)
         user = self.model(
             username=username,
@@ -18,6 +20,7 @@ class CustomUserManager(BaseUserManager):
             phone_number=phone_number,
             **extra_fields
         )
+        print('set pass')
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -31,7 +34,7 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(username, email, phone_number, password, **extra_fields)
+        return self.create(username, email, phone_number, password, **extra_fields)
     
 
 class CustomUser(AbstractUser):
@@ -41,8 +44,7 @@ class CustomUser(AbstractUser):
         ('student', 'Student'),
     )
 
-    # full_name = models.CharField(max_length=255,null=True, blank = True)
-    phone_number = models.CharField(max_length=15, unique=True)
+    phone_number = models.CharField(max_length=15, unique= True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     full_name = models.CharField(max_length= 255 , blank = True, null = True)
 
