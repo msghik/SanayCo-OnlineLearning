@@ -9,7 +9,7 @@ class Course(models.Model):
     instructor = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE,
-        limit_choices_to={'role': 'instructor'},  # optional filter
+        limit_choices_to={'role': 'instructor'}, 
         related_name='courses_instructed'
     )
     
