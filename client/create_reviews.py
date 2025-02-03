@@ -5,8 +5,8 @@ def main():
     # 1) Obtain JWT Token
     token_url = "http://127.0.0.1:8000/api/token/"
     login_data = {
-        "username": "7",
-        "password": "7"
+        "username": "admin",
+        "password": "admin"
     }
 
     token_response = requests.post(token_url, json=login_data)

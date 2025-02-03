@@ -4,7 +4,7 @@ from django.db import models
 
 class CustomUserManager(BaseUserManager):
     def create(self, username, email, phone_number, password=None, **extra_fields):
-        print("11111111111111111111111111")
+
         if not username:
             raise ValueError("The Username field must be set")
         if not email:
@@ -12,7 +12,6 @@ class CustomUserManager(BaseUserManager):
         if not phone_number:
             raise ValueError("The Phone Number field musیییییییt be set")
 
-        print('create_user')
         email = self.normalize_email(email)
         user = self.model(
             username=username,
@@ -20,7 +19,7 @@ class CustomUserManager(BaseUserManager):
             phone_number=phone_number,
             **extra_fields
         )
-        print('set pass')
+        
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -54,4 +53,4 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.username
+        return f"{self.username} - {self.first_name} {self.last_name}"

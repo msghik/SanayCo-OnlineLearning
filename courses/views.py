@@ -34,7 +34,7 @@ def course_detail(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser, IsInstructor])
+@permission_classes([IsAdminUser | IsInstructor])
 def course_create(request):
 
     data = request.data
