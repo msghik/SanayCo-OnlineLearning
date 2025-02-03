@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'accounts',
-    'courses'
+    'courses',
+    'categories'
 ]
 
 REST_FRAMEWORK = {
@@ -49,10 +51,10 @@ REST_FRAMEWORK = {
     ),
 }
 
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=2),
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(hours=4),  
-}
+# JWT_AUTH = {
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=2),
+#     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(hours=4),  
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

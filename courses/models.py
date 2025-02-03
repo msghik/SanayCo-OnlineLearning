@@ -1,5 +1,6 @@
 from django.db import models
-from django.conf import settings
+from accounts.models import CustomUser
+from categories.models import Category
 
 class Course(models.Model):
     
@@ -7,7 +8,7 @@ class Course(models.Model):
     description = models.TextField()
     
     instructor = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+        CustomUser, 
         on_delete=models.CASCADE,
         limit_choices_to={'role': 'instructor'}, 
         related_name='courses_instructed'
@@ -16,7 +17,7 @@ class Course(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     
     users = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, 
+        CustomUser, 
         related_name='courses_enrolled', 
         blank=True
     )
@@ -25,6 +26,14 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     is_published = models.BooleanField(default=False)
+    
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE, 
+        related_name='courses', 
+        null=True, 
+        blank=True
+    )
     
     def __str__(self):
         return self.title
