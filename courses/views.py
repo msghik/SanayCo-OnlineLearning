@@ -6,13 +6,21 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated,AllowAny
 
-
 @api_view(['GET'])
 def course_list(request):
     
-    courses = Course.objects.filter(is_published = True)
-    serializer = CourseSerializer(courses, many = True)
-    return Response(serializer.data)
+    courses = Course.objects.filter(is_published=True)
+
+    category_name = request.GET.get('category')
+    if category_name:
+        courses = courses.filter(category__name=category_name)
+
+    search_param = request.GET.get('search')
+    if search_param:
+        courses = courses.filter(category__description__icontains=search_param)
+
+    serializer = CourseSerializer(courses, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def course_detail(request, pk):
