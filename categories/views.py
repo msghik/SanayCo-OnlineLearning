@@ -4,9 +4,12 @@ from rest_framework import status
 from .models import Category
 from .serializers import CategorySerializer
 from django.http import Http404
+from rest_framework.permissions import IsAdminUser
 
 class CategoryListCreateView(APIView):
-
+    
+    permission_classes = [IsAdminUser]
+    
     def get(self, request):
 
         categories = Category.objects.all()
@@ -33,6 +36,8 @@ class CategoryListCreateView(APIView):
 
 class CategoryDetailView(APIView):
 
+    permission_classes = [IsAdminUser]
+    
     def get_object(self, pk):
         try:
             return Category.objects.get(pk=pk)
