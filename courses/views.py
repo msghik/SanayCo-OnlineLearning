@@ -6,7 +6,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser
 from .permissions import IsOwner, IsInstructor
+from rest_framework.views import APIView
+import os
+from django.conf import settings
 
+ 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def course_list(request):
@@ -53,7 +57,7 @@ def course_create(request):
 
 
 @api_view(['PUT', 'PATCH'])
-@permission_classes([IsAdminUser, IsOwner])
+@permission_classes([IsAdminUser | IsOwner])
 def course_update(request, pk):
     
     course = get_object_or_404(Course, pk=pk)
@@ -74,11 +78,45 @@ def course_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser, IsOwner])
+@permission_classes([IsAdminUser | IsOwner])
 def course_delete(request, pk):
     
     course = get_object_or_404(Course, pk=pk)
     
     course.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CourseUploadVideoView(APIView):
+    
+    def post(self, request, pk):
+
+        course = get_object_or_404(Course, pk=pk)
+        uploaded_file = request.FILES.get('video')  
+
+        if not uploaded_file:
+            return Response({"detail": "No file uploaded."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+        file_extension = os.path.splitext(uploaded_file.name)[1]
+        new_filename = f"course_{pk}_video{file_extension}"
+        file_path = os.path.join("course_videos", new_filename) 
+
+
+        full_path = os.path.join(settings.MEDIA_ROOT, file_path)
+        with open(full_path, 'wb+') as destination:
+            for chunk in uploaded_file.chunks():
+                destination.write(chunk)
+
+
+        course.video = file_path
+        course.save()
+
+ 
+        serializer = CourseSerializer(course)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
+    
 

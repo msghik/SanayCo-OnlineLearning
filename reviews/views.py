@@ -31,7 +31,7 @@ class ReviewDetailView(APIView):
         
         if self.request.method == 'GET':
             return [AllowAny]
-        return [IsAdminUser, IsOwner]
+        return [IsAdminUser | IsOwner]
     
         
     def get_object(self, pk):
