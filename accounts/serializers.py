@@ -7,6 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True, allow_null=False)
     last_name = serializers.CharField(required=True, allow_null=False)
     password = serializers.CharField(write_only=True, required=True)
+    role = serializers.CharField(read_only=True)
     # phone_number = serializers.CharField(required = True, allow_null = False)
     
     class Meta:

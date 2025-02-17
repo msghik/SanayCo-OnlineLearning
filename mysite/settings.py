@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'categories',
-    'reviews'
+    'reviews',
+    'drf_yasg'
 ]
 
 REST_FRAMEWORK = {

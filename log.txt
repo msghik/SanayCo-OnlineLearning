@@ -1,0 +1,154 @@
+.
+├── README.md
+├── accounts
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── admin.cpython-313.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── models.cpython-313.pyc
+│   │   ├── serializers.cpython-311.pyc
+│   │   ├── serializers.cpython-313.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-313.pyc
+│   │   ├── views.cpython-311.pyc
+│   │   └── views.cpython-313.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-311.pyc
+│   │       ├── 0001_initial.cpython-313.pyc
+│   │       ├── 0002_customuser_des.cpython-311.pyc
+│   │       ├── 0002_customuser_des.cpython-313.pyc
+│   │       ├── 0003_alter_customuser_full_name.cpython-311.pyc
+│   │       ├── 0003_alter_customuser_full_name.cpython-313.pyc
+│   │       ├── 0004_remove_customuser_full_name_alter_customuser_des.cpython-311.pyc
+│   │       ├── 0004_remove_customuser_full_name_alter_customuser_des.cpython-313.pyc
+│   │       ├── 0005_rename_des_customuser_full_name.cpython-311.pyc
+│   │       ├── 0005_rename_des_customuser_full_name.cpython-313.pyc
+│   │       ├── 0006_alter_customuser_phone_number.cpython-311.pyc
+│   │       ├── 0007_alter_customuser_phone_number.cpython-311.pyc
+│   │       ├── __init__.cpython-311.pyc
+│   │       └── __init__.cpython-313.pyc
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── categories
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── serializers.cpython-311.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   └── views.cpython-311.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_alter_category_options_remove_category_slug_and_more.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-311.pyc
+│   │       ├── 0002_alter_category_options_remove_category_slug_and_more.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── client
+│   ├── create_category.py
+│   ├── create_courses.py
+│   ├── create_reviews.py
+│   ├── create_users.py
+│   ├── list_reviews.py
+│   ├── sending_file.py
+│   ├── test_instructor_CRUD_course.py
+│   └── test_login.py
+├── courses
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── admin.cpython-311.pyc
+│   │   ├── apps.cpython-311.pyc
+│   │   ├── models.cpython-311.pyc
+│   │   ├── permissions.cpython-311.pyc
+│   │   ├── serializers.cpython-311.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   └── views.cpython-311.pyc
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_course_category.py
+│   │   ├── 0003_alter_course_category.py
+│   │   ├── 0004_course_video.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   │       ├── 0001_initial.cpython-311.pyc
+│   │       ├── 0002_course_category.cpython-311.pyc
+│   │       ├── 0003_alter_course_category.cpython-311.pyc
+│   │       ├── 0004_course_video.cpython-311.pyc
+│   │       └── __init__.cpython-311.pyc
+│   ├── models.py
+│   ├── permissions.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── db.sqlite3
+├── log.txt
+├── manage.py
+├── media
+│   └── course_videos
+├── mysite
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   ├── __init__.cpython-313.pyc
+│   │   ├── settings.cpython-311.pyc
+│   │   ├── settings.cpython-313.pyc
+│   │   ├── urls.cpython-311.pyc
+│   │   ├── urls.cpython-313.pyc
+│   │   ├── wsgi.cpython-311.pyc
+│   │   └── wsgi.cpython-313.pyc
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── reviews
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-311.pyc
+    │   ├── admin.cpython-311.pyc
+    │   ├── apps.cpython-311.pyc
+    │   ├── models.cpython-311.pyc
+    │   ├── permissions.cpython-311.pyc
+    │   ├── serializers.cpython-311.pyc
+    │   ├── urls.cpython-311.pyc
+    │   └── views.cpython-311.pyc
+    ├── admin.py
+    ├── apps.py
+    ├── migrations
+    │   ├── 0001_initial.py
+    │   ├── __init__.py
+    │   └── __pycache__
+    │       ├── 0001_initial.cpython-311.pyc
+    │       └── __init__.cpython-311.pyc
+    ├── models.py
+    ├── permissions.py
+    ├── serializers.py
+    ├── tests.py
+    ├── urls.py
+    └── views.py
+
+22 directories, 130 files

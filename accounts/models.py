@@ -10,7 +10,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError("The Email field must be set")
         if not phone_number:
-            raise ValueError("The Phone Number field musیییییییt be set")
+            raise ValueError("The Phone Number field must be set")
 
         email = self.normalize_email(email)
         user = self.model(
@@ -27,6 +27,7 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, phone_number, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('role', 'admin')
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -36,16 +37,16 @@ class CustomUserManager(BaseUserManager):
         return self.create(username, email, phone_number, password, **extra_fields)
     
 
-class CustomUser(AbstractUser):
-    ROLE_CHOICES = (
-        ('admin', 'Admin'),
-        ('instructor', 'Instructor'),
-        ('student', 'Student'),
-    )
+class RoleChoices(models.TextChoices):
+    ADMIN = 'admin', 'Admin'
+    INSTRUCTOR = 'instructor', 'Instructor'
+    STUDENT = 'student', 'Student'
 
-    phone_number = models.CharField(max_length=15, unique= True)
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-    full_name = models.CharField(max_length= 255 , blank = True, null = True)
+class CustomUser(AbstractUser):
+    
+    phone_number = models.CharField(max_length=15, unique=True)
+    role = models.CharField(max_length=20, choices=RoleChoices.choices)
+    full_name = models.CharField(max_length=255, blank=True, null=True)
 
     REQUIRED_FIELDS = ['email', 'phone_number']
     USERNAME_FIELD = 'username'
