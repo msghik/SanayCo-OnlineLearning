@@ -65,3 +65,25 @@ class CategoryDetailView(APIView):
         category = self.get_object(pk)
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+from rest_framework import generics
+from rest_framework.response import Response
+from .documents import CategoryDocument
+
+class CategorySearchView(generics.ListAPIView):
+    serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        """
+        Search the 'categories_index' using the user's query from ?q=<term>.
+        """
+        query = self.request.query_params.get('q', None)
+        if query:
+            search = CategoryDocument.search().query("match", name=query)
+            results = search.execute()
+
+            category_ids = [hit.meta.id for hit in results]
+
+            return Category.objects.filter(pk__in=category_ids)
+
+        return Category.objects.all()

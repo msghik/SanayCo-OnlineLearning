@@ -7,6 +7,7 @@ from .views import (
     course_delete,
     CourseUploadVideoView
 )
+from .views import CourseSearchView
 
 
 urlpatterns = [
@@ -17,6 +18,8 @@ urlpatterns = [
     path('<int:pk>/delete/', course_delete, name='course-delete'),
     
     path('<int:pk>/upload-video/', CourseUploadVideoView.as_view(), name='course-upload-video'),
+    
+    path('search/', CourseSearchView.as_view(), name='course-search'),
 ]
 
 

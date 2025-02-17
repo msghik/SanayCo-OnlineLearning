@@ -117,6 +117,33 @@ class CourseUploadVideoView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
-    
+# courses/views.py
+
+from rest_framework import generics
+from rest_framework.response import Response
+from .documents import CourseDocument
+
+class CourseSearchView(generics.ListAPIView):
+    serializer_class = CourseSerializer
+
+    def get_queryset(self):
+        """
+        We'll search the 'courses_index' for the user's query and
+        then return the corresponding Django queryset so we can reuse our DRF serializer.
+        """
+        query = self.request.query_params.get('q', None)
+        if query:
+
+            search = CourseDocument.search().query("match", title=query)
+            
+            results = search.execute()
+            
+            course_ids = [hit.meta.id for hit in results]
+            
+            return Course.objects.filter(pk__in=course_ids)
+        
+        # If no query
+        return Course.objects.all()
+
     
 

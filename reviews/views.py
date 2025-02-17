@@ -54,3 +54,36 @@ class ReviewDetailView(APIView):
         review = self.get_object(pk)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+from rest_framework import generics
+from rest_framework.response import Response
+from django.db.models import Q
+from .documents import ReviewDocument
+from .models import Review
+from .serializers import ReviewSerializer 
+
+class ReviewSearchView(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        """
+        We'll search 'reviews_index' for the user's query from ?q=<term>
+        and return the corresponding Django queryset.
+        """
+        query = self.request.query_params.get('q')
+        if query:
+
+            search = ReviewDocument.search().query(
+                    "multi_match",
+                    query=query,
+                    fields=["content", "rating"]
+            )
+            
+            results = search.execute()
+
+            review_ids = [hit.meta.id for hit in results]
+
+            return Review.objects.filter(pk__in=review_ids)
+        
+        return Review.objects.all()

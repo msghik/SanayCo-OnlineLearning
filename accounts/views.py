@@ -33,4 +33,28 @@ class UserViewSet(viewsets.ModelViewSet):
         
     #     return Response({"detail": "User successfully created"}, status=status.HTTP_201_CREATED)
 
-    
+from rest_framework import generics
+from rest_framework.response import Response
+from .documents import CustomUserDocument
+from .models import CustomUser
+from .serializers import UserSerializer 
+
+class UserSearchView(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        """
+        Search the 'accounts_index' using ?q=<term>.
+        We'll do a simple match on the 'username' field as an example.
+        """
+        query = self.request.query_params.get('q', None)
+        if query:
+            search = CustomUserDocument.search().query("match", username=query)
+            results = search.execute()
+
+
+            user_ids = [hit.meta.id for hit in results]
+
+            return CustomUser.objects.filter(pk__in=user_ids)
+
+        return CustomUser.objects.all()

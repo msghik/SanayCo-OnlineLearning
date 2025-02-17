@@ -44,8 +44,16 @@ INSTALLED_APPS = [
     'courses',
     'categories',
     'reviews',
-    'drf_yasg'
+    'drf_yasg',
+    'django_elasticsearch_dsl'
 ]
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:5601',
+        'http_auth': ('admin', 'admin')
+    }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
